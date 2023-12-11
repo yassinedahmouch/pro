@@ -2,6 +2,8 @@ package com.maiia.pro.service;
 
 import com.maiia.pro.entity.Appointment;
 import com.maiia.pro.repository.AppointmentRepository;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,13 @@ public class ProAppointmentService {
     public List<Appointment> findByPractitionerId(Integer practitionerId) {
         return appointmentRepository.findByPractitionerId(practitionerId);
     }
+    
+	public Appointment createAppointment(Integer practitionerId, Integer patientId, LocalDateTime startDate,
+			LocalDateTime endDate) {
+		return appointmentRepository.save(Appointment.builder().practitionerId(practitionerId)
+															   .patientId(patientId)
+															   .startDate(startDate)
+														       .endDate(endDate)
+															   .build());
+	}
 }
